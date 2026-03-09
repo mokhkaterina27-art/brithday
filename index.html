@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Для Насті ❤️</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:black;
+color:white;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+text-align:center;
+overflow-x:hidden;
+}
+
+button{
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+background:#ff4d6d;
+color:white;
+margin:10px;
+}
+
+#card{
+display:none;
+background:white;
+color:black;
+padding:40px;
+border-radius:20px;
+max-width:600px;
+}
+
+img{
+width:250px;
+border-radius:20px;
+margin:20px;
+}
+
+/* галерея */
+
+#gallery{
+display:none;
+margin-top:20px;
+}
+
+#gallery img{
+width:200px;
+margin:10px;
+border-radius:15px;
+opacity:0;
+transform:scale(0.8);
+transition:0.8s;
+cursor:pointer;
+}
+
+/* LIGHTBOX */
+
+#lightbox{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
+z-index:1000;
+}
+
+#lightbox img{
+max-width:95%;
+max-height:95%;
+border-radius:10px;
+}
+
+/* сердечка */
+
+@keyframes fall{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(100vh);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="start">
+<h1>💌 У тебе є повідомлення</h1>
+<button onclick="openGift()">Відкрити</button>
+</div>
+
+<div id="card">
+
+<h1>🎉 З Днем Народження!</h1>
+
+<img src="photo.jpg">
+
+<p>
+З днем народження!!!! 🎉🎉🎊 Моя прекрасна, чарівна Настя, бажаю тобі по більше виконування твоїх бажань, щастя (ну куди без нього), вирішення всіх проблем та багато здоров'я 😊😊✨🎊
+</p>
+
+<button onclick="showGallery()">📸 Фото галерея</button>
+
+</div>
+
+<!-- галерея -->
+
+<div id="gallery">
+
+<img src="photo.jpg\1000043374.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043382.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043387.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043377.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043390.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043388.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043389.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043385.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043383.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043386.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043375.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043378.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043379.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043380.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043381.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043391.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043392.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043393.jpg" onclick="openPhoto(this)">
+<img src="photo.jpg\1000043371.jpg" onclick="openPhoto(this)">
+
+
+</div>
+
+<!-- LIGHTBOX -->
+
+<div id="lightbox" onclick="closePhoto()">
+<img id="lightbox-img">
+</div>
+
+<audio id="music">
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+function openGift(){
+
+document.getElementById("start").style.display="none";
+document.getElementById("card").style.display="block";
+
+document.getElementById("music").play();
+
+confetti({
+particleCount:200,
+spread:160
+});
+
+}
+
+/* сердечка */
+
+function heart(){
+
+const h=document.createElement("div");
+
+h.innerHTML="❤️";
+
+h.style.position="fixed";
+h.style.left=Math.random()*window.innerWidth+"px";
+h.style.top="-20px";
+h.style.fontSize="24px";
+h.style.animation="fall 5s linear";
+
+document.body.appendChild(h);
+
+setTimeout(()=>{
+h.remove();
+},5000);
+
+}
+
+setInterval(heart,400);
+
+/* поява фото */
+
+function showGallery(){
+
+const gallery = document.getElementById("gallery");
+
+gallery.style.display="block";
+
+const photos = gallery.querySelectorAll("img");
+
+photos.forEach((img,i)=>{
+
+setTimeout(()=>{
+img.style.opacity="1";
+img.style.transform="scale(1)";
+}, i*400);
+
+});
+
+}
+
+/* відкриття фото */
+
+function openPhoto(img){
+
+document.getElementById("lightbox").style.display="flex";
+
+document.getElementById("lightbox-img").src = img.src;
+
+}
+
+function closePhoto(){
+
+document.getElementById("lightbox").style.display="none";
+
+}
+
+</script>
+
+</body>
+</html>
